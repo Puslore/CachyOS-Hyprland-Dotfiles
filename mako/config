@@ -1,0 +1,11 @@
+default-timeout=2500
+
+font=Comic Sans MS
+background-color=#FFFFFF
+text-color=#000000
+border-color=#FF0000
+progress-color=#000000
+border-radius=8
+max-icon-size=60
+
+max-history=3
