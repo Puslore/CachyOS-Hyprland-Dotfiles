@@ -1,16 +1,16 @@
+
 * {
-    border: none;
-    margin-right: 3px;
-    border-radius: 10;
-    font-family: "Comic Sans MS";
-    font-size: 18px;
-    min-height: 10px;
+	border: none;
+	margin-right: 3px;
+	border-radius: 10;
+        font-family: "Comic Sans MS" ;
+	font-size: 18px;
+	min-height: 10px;
 }
 
 window#waybar {
-    background: transparent;
+	background: transparent;
 }
-
 #network, #custom-keybinds, #cava, #battery, #backlight, #language, #pulseaudio, 
 #clock, #disk, #privacy, #idle_inhibitor, #memory, #cpu, #custom-launcher, 
 #network.disconnected, #custom-power, #workspaces, #tray, #tray menu {
@@ -21,74 +21,65 @@ window#waybar {
     margin-bottom: 0px;
     border-radius: 10px;
     transition: none;
-    background: #191919;  /* Глубокий черный */
-    color: #A057FF;  /* Яркий фиолетовый */
+    background: #24273a;  /* Темно-фиолетовый */
+    color: #8caaee;  /* Голубовато-синий */
     border-bottom: 3px;
     border-style: solid;
-    border-color: #A057FF;
+    border-color: #8caaee;
     transition: 0.3s;
 }
-
 #network:hover, #custom-keybinds:hover, #cava:hover, #battery:hover, #backlight:hover, 
 #language:hover, #pulseaudio:hover, #clock:hover, #disk:hover, #privacy:hover, 
 #memory:hover, #cpu:hover, #custom-launcher:hover, #network.disconnected:hover, 
 #custom-power:hover {
-    color: #191919;
-    background: #A057FF;
+    color: #24273a;
+    background: #8caaee;
 }
-
 #pulseaudio.muted {
-    color: #A057FF;
-    background: #191919; 
+    color: #8caaee;
+    background: #24273a; 
     border-bottom: 3px;
     border-style: solid;
-    border-color: #A057FF;
+    border-color: #8caaee;
     transition: 0.3s;
 }
-
 #pulseaudio.muted:hover {
-    background: #A057FF;
-    color: #191919; 
+    background: #8caaee;
+    color: #24273a; 
 }
-
 #idle_inhibitor.activated {
-    color: #FF56AC;
-    border-color: #FF56AC;
+    color: #b7bdf8;
+    border-color: #b7bdf8;
 }
-
 #idle_inhibitor.activated:hover {
-    background: #FF56AC;
-    color: #191919;
-    border-color: #FF56AC;
+    background: #b7bdf8;
+    color: #24273a;
+    border-color: #b7bdf8;
 }
-
 #idle_inhibitor.deactivated {
-    color: #A057FF;
+    color: #8caaee;
 }
-
 #idle_inhibitor.deactivated:hover {
-    color: #191919; 
-    background: #A057FF;
+    color: #24273a; 
+    background: #8caaee;
 }
-
 #workspaces {
     margin-top: 10px;
     margin-left: 8px;
     padding-right: 4px;
-    background: #191919; 
+    background: #24273a; 
     border-bottom: 3px;
     border-style: solid;
-    border-color: #A057FF;
-    color: #A057FF;
+    border-color: #8caaee;
+    color: #8caaee;
     transition: 0.3s;
 }
-
 #workspaces button {
-    color: #A057FF;
+    color: #8caaee;
     transition: 0.3s;
 }
-
 #workspaces button:hover {
     background: transparent;
     color: transparent;
 }
+

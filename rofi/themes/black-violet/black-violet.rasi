@@ -1,0 +1,172 @@
+@import "./colors/purple-night.rasi"
+
+* {
+    selected-active-foreground:  @background; /* Цвет текста активного элемента */
+    lightfg:                     @text;       /* Светлый текст */
+    separatorcolor:              @overlay2;   /* Цвет разделителей */
+    urgent-foreground:           @text;        /* Цвет текста срочного элемента */
+    alternate-urgent-background: @surface0;   /* Фон срочного элемента */
+    lightbg:                     @surface1;   /* Светлый фон */
+    background-color:            transparent; /* Прозрачный фон окна */
+    border-color:                @overlay2;   /* Цвет границы окна */
+    normal-background:           @background; /* Основной фон элементов */
+    selected-urgent-background:  @red;        /* Фон срочного элемента при выделении */
+    alternate-active-background: @surface2;   /* Фон активного элемента */
+    spacing:                     20;           /* Расстояние между элементами */
+    alternate-normal-foreground: @subtext0;   /* Цвет текста для чередующихся элементов */
+    urgent-background:           @surface0;   /* Фон срочных элементов */
+    selected-normal-foreground:  @subtext1;       /* Цвет текста выделенного элемента */
+    active-foreground:           @lavender;   /* Цвет текста активного элемента */
+    background:                  @base;       /* Основной фон окна */
+    selected-active-background:  @mauve;      /* Фон активного элемента при выделении */
+    active-background:           @surface1;   /* Фон активного элемента */
+    selected-normal-background:  @mauve;      /* Фон выделенного элемента */
+    alternate-normal-background: @overlay0;   /* Фон чередующихся элементов */
+    foreground:                  @text;       /* Основной цвет текста */
+    selected-urgent-foreground:  @background; /* Цвет текста срочного элемента при выделении */
+    normal-foreground:           @text;       /* Основной цвет текста элементов */
+    alternate-urgent-foreground: @red;        /* Цвет текста чередующихся срочных элементов */
+    alternate-active-foreground: @lavender;   /* Цвет текста чередующихся активных элементов */
+
+}
+
+
+element {
+    padding: 5px ;
+    cursor:  pointer;
+    spacing: 5px ;
+    border:  1px;
+}
+element normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+element normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+element normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+element selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+element selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+element selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+element alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+element alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+element alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+element-text {
+    background-color: transparent;
+    cursor:           inherit;
+    highlight:        inherit;
+    text-color:       inherit;
+}
+element-icon {
+    background-color: transparent;
+    size:             1.0000em ;
+    cursor:           inherit;
+    text-color:       inherit;
+}
+window {
+    padding:          5;
+    background-color: @background;
+    border:           1;
+}
+mainbox {
+    padding: 0;
+    border:  0;
+}
+message {
+    padding:      1px ;
+    border-color: @separatorcolor;
+    border:       2px dash 0px 0px ;
+}
+textbox {
+    text-color: @foreground;
+}
+listview {
+    padding:      2px 0px 0px ;
+    scrollbar:    true;
+    border-color: @separatorcolor;
+    spacing:      2px ;
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+}
+scrollbar {
+    width:        4px ;
+    padding:      0;
+    handle-width: 8px ;
+    border:       0;
+    handle-color: @mauve;
+}
+sidebar {
+    border-color: @separatorcolor;
+    border:       2px dash 0px 0px ;
+}
+button {
+    cursor:     pointer;
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+button selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+num-filtered-rows {
+    expand:     false;
+    text-color: Gray;
+}
+num-rows {
+    expand:     false;
+    text-color: Gray;
+}
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: Gray;
+}
+inputbar {
+    padding:    1px ;
+    spacing:    0px ;
+    text-color: @normal-foreground;
+    children:   [ "prompt","textbox-prompt-colon","entry","num-filtered-rows","textbox-num-sep","num-rows","case-indicator" ];
+}
+case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+entry {
+    text-color:        @normal-foreground;
+    cursor:            text;
+    spacing:           0;
+    placeholder-color: Gray;
+    placeholder:       "Type to filter";
+}
+prompt {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+textbox-prompt-colon {
+    margin:     0px 0.3000em 0.0000em 0.0000em ;
+    expand:     false;
+    str:        ":";
+    text-color: inherit;
+}

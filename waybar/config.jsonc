@@ -3,7 +3,7 @@
 	"modules-left": ["battery", "backlight", "pulseaudio", "memory"],
 	/*"modules-left": ["custom/launcher","cpu","memory","disk","hyprland/workspaces"],*/
 	"modules-center": ["clock"],
-	"modules-right": ["tray", "cava", "hyprland/language","network","custom/power"],
+	"modules-right": ["tray", "cava", "hyprland/language","network"],
 	
 	"pulseaudio": {
 		"tooltip": false,
