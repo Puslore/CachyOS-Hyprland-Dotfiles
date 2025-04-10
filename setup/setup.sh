@@ -1,175 +1,177 @@
 #!/bin/bash
 
-# Скрипт для установки Hyprland на CachyOS
+# Script to set up Hyprland environment on CachyOS
+# Exit on error
+set -e
 
-# Цвета для вывода
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # Без цвета
-
-# Функции для вывода информации
-print_info() {
-    echo -e "${BLUE}[ИНФО]${NC} $1"
+# Function to print info messages
+info() {
+    echo -e "\e[1;34m[INFO]\e[0m $1"
 }
 
-print_success() {
-    echo -e "${GREEN}[УСПЕХ]${NC} $1"
-}
-
-print_warning() {
-    echo -e "${YELLOW}[ВНИМАНИЕ]${NC} $1"
-}
-
-print_error() {
-    echo -e "${RED}[ОШИБКА]${NC} $1"
-}
-
-# Функция для проверки наличия команды
-command_exists() {
-    command -v "$1" &> /dev/null
-}
-
-# Функция для проверки установленных пакетов
-package_installed() {
-    pacman -Q "$1" &> /dev/null
-}
-
-# Проверка на запуск от root
-if [ "$EUID" -eq 0 ]; then
-    print_error "Пожалуйста, не запускайте этот скрипт от имени root или с sudo"
-    exit 1
-fi
-
-print_info "Начинаем установку Hyprland на CachyOS..."
-
-# Обновление системы
-print_info "Обновление пакетов системы..."
-sudo pacman -Syu --noconfirm || {
-    print_error "Не удалось обновить пакеты системы"
-    exit 1
-}
-print_success "Система успешно обновлена"
-
-# Установка yay, если не установлен
-if ! command_exists yay; then
-    print_info "Установка yay..."
-    
-    # Устанавливаем git и base-devel, если нужно
-    sudo pacman -S --noconfirm --needed git base-devel || {
-        print_error "Не удалось установить git и base-devel"
-        exit 1
-    }
-    
-    cd /tmp
-    git clone https://aur.archlinux.org/yay-bin.git
-    cd yay-bin
-    makepkg -si --noconfirm || {
-        print_error "Не удалось установить yay"
-        exit 1
-    }
-    cd ~
-    print_success "yay успешно установлен"
-fi
-
-# Установка flatpak, если не установлен
-if ! command_exists flatpak; then
-    print_info "Установка flatpak..."
-    sudo pacman -S --noconfirm flatpak || {
-        print_error "Не удалось установить flatpak"
-        exit 1
-    }
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo || {
-        print_warning "Не удалось добавить репозиторий flathub"
-    }
-    print_success "flatpak успешно установлен"
-fi
-
-# Установка Hyprland
-print_info "Установка Hyprland и необходимых компонентов..."
-sudo pacman -S --noconfirm --needed hyprland xdg-desktop-portal-hyprland || {
-    print_error "Не удалось установить Hyprland"
+# Function to print error messages
+error() {
+    echo -e "\e[1;31m[ERROR]\e[0m $1"
     exit 1
 }
 
-# Установка дополнительных зависимостей для Hyprland
-sudo pacman -S --noconfirm --needed polkit-kde-agent || {
-    print_warning "Не удалось установить polkit-kde-agent"
+# Function to check if a package is available in the official repos
+is_in_official_repos() {
+    pacman -Si "$1" &> /dev/null
 }
 
-print_success "Hyprland успешно установлен"
-
-# Установка указанных пакетов через pacman
-print_info "Установка пакетов через pacman..."
-PACMAN_PACKAGES="waybar mako hyprpaper rofi kitty telegram-desktop steam"
-sudo pacman -S --noconfirm --needed $PACMAN_PACKAGES || {
-    print_warning "Некоторые пакеты не удалось установить через pacman, попробуем альтернативные методы"
+# Function to install packages with pacman
+install_with_pacman() {
+    info "Installing packages with pacman: $@"
+    sudo pacman -S --noconfirm --needed "$@" || error "Failed to install packages with pacman: $@"
 }
 
-# Проверка и установка hyprlock и hypridle
-if ! package_installed hyprlock; then
-    print_info "Установка hyprlock через yay..."
-    yay -S --noconfirm hyprlock || {
-        print_warning "Не удалось установить hyprlock"
-    }
+# Function to install packages with yay
+install_with_yay() {a
+    info "Installing packages with yay: $@"
+    yay -S --noconfirm --needed "$@" || error "Failed to install packages with yay: $@"
+}
+
+# Function to install packages with flatpak
+install_with_flatpak() {
+    info "Installing packages with flatpak: $@"
+    flatpak install -y flathub "$@" || error "Failed to install packages with flatpak: $@"
+}
+
+# 1. Update system
+info "Updating system..."
+sudo pacman -Syu --noconfirm || error "Failed to update system"
+
+# 2. Install yay if not already installed
+if ! command -v yay &> /dev/null; then
+    info "Installing yay..."
+    # Install dependencies
+    install_with_pacman base-devel git
+    # Clone and build yay
+    git clone https://aur.archlinux.org/yay.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si --noconfirm
+    cd - || exit
+    rm -rf /tmp/yay
+else
+    info "yay is already installed"
 fi
 
-if ! package_installed hypridle; then
-    print_info "Установка hypridle через yay..."
-    yay -S --noconfirm hypridle || {
-        print_warning "Не удалось установить hypridle"
-    }
+# 3. Install flatpak
+info "Installing flatpak..."
+install_with_pacman flatpak
+
+# 4. Install Hyprland
+info "Installing Hyprland..."
+install_with_pacman hyprland
+
+# 5. Install necessary packages for the environment
+info "Installing necessary environment packages..."
+install_with_pacman \
+    wayland \
+    xorg-xwayland \
+    pipewire \
+    pipewire-pulse \
+    wireplumber \
+    polkit-kde-agent \
+    qt5-wayland \
+    qt6-wayland \
+    xdg-desktop-portal-hyprland
+
+# 6. Install SDDM and enable it
+info "Installing and enabling SDDM..."
+install_with_pacman sddm
+sudo systemctl enable sddm.service
+
+# 7. Install CachyOS SDDM themes
+info "Installing CachyOS SDDM themes..."
+if is_in_official_repos cachyos-themes-sddm; then
+    install_with_pacman cachyos-themes-sddm
+else
+    install_with_yay cachyos-themes-sddm
 fi
 
-# Установка vscode (именно vscode, не code)
-if ! package_installed visual-studio-code-bin; then
-    print_info "Установка vscode через yay..."
-    yay -S --noconfirm visual-studio-code-bin || {
-        print_warning "Не удалось установить vscode через yay, пробуем flatpak..."
-        flatpak install -y flathub com.visualstudio.code || {
-            print_error "Не удалось установить vscode"
-        }
-    }
+# 8. Install packages mentioned in the Hyprland config
+info "Installing packages mentioned in the config..."
+config_packages=(
+    kitty 
+    dolphin 
+    waybar 
+    mako 
+    hyprpaper 
+    hypridle 
+    hyprlock 
+    rofi
+)
+
+for pkg in "${config_packages[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
+# 9. Setup font
+info "Setting up MS Comic Sans font as a system font..."
+# Create font directory if it doesn't exist
+sudo mkdir -p /usr/share/fonts/TTF/
+# Copy font to system fonts directory
+if [ -f ~/.config/fonts/MS\ Comic\ Sans.ttf ]; then
+    sudo cp ~/.config/fonts/MS\ Comic\ Sans.ttf /usr/share/fonts/TTF/
+    # Update font cache
+    sudo fc-cache -f
+    info "Font installed successfully"
+else
+    error "Font file not found at ~/.config/fonts/MS Comic Sans.ttf"
 fi
 
-# Установка Heroic Games Launcher
-if ! package_installed heroic-games-launcher-bin; then
-    print_info "Установка Heroic Games Launcher через yay..."
-    yay -S --noconfirm heroic-games-launcher-bin || {
-        print_warning "Не удалось установить Heroic Games Launcher через yay, пробуем flatpak..."
-        flatpak install -y flathub com.heroicgameslauncher.hgl || {
-            print_error "Не удалось установить Heroic Games Launcher"
-        }
-    }
+# 10. Install additional requested packages
+info "Installing additional requested packages..."
+additional_packages=(telegram-desktop steam)
+
+for pkg in "${additional_packages[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
+# Visual Studio Code (vscode, not code)
+info "Installing Visual Studio Code..."
+if is_in_official_repos visual-studio-code; then
+    install_with_pacman visual-studio-code
+else
+    install_with_yay visual-studio-code-bin
 fi
 
-# Установка Spotify
-if ! package_installed spotify; then
-    print_info "Установка Spotify через yay..."
-    yay -S --noconfirm spotify || {
-        print_warning "Не удалось установить Spotify через yay, пробуем flatpak..."
-        flatpak install -y flathub com.spotify.Client || {
-            print_error "Не удалось установить Spotify"
-        }
-    }
+# Heroic Games Launcher
+info "Installing Heroic Games Launcher..."
+if is_in_official_repos heroic-games-launcher; then
+    install_with_pacman heroic-games-launcher
+elif is_in_official_repos cachyos-gaming-meta; then
+    # CachyOS gaming meta package includes heroic games launcher
+    install_with_pacman cachyos-gaming-meta
+else
+    install_with_yay heroic-games-launcher-bin
 fi
 
-# Настройка автозапуска Hyprland
-print_info "Настройка автозапуска Hyprland..."
-
-# Создание файла сессии для display manager, если необходимо
-if [ -d "/usr/share/wayland-sessions" ]; then
-    print_info "Создание файла сессии для display manager..."
-    cat > /tmp/hyprland.desktop << 'EOL'
-[Desktop Entry]
-Name=Hyprland
-Comment=Тайлинговый Wayland композитор
-Exec=Hyprland
-Type=Application
-EOL
-    sudo mv /tmp/hyprland.desktop /usr/share/wayland-sessions/hyprland.desktop
+# Spotify
+info "Installing Spotify..."
+if is_in_official_repos spotify; then
+    install_with_pacman spotify
+else
+    install_with_flatpak com.spotify.Client
 fi
 
-print_success "Установка завершена! Вы можете запустить Hyprland, выйдя из системы и выбрав Hyprland в своем display manager, или выполнив команду 'Hyprland' в TTY."
-print_info "Если у вас возникнут проблемы, посетите вики Hyprland: https://wiki.hyprland.org/"
+# Obsidian
+info "Installing Obsidian..."
+if is_in_official_repos obsidian; then
+    install_with_pacman obsidian
+else
+    install_with_yay obsidian-bin
+fi
+
+info "Setup completed successfully!"
+info "You may need to reboot your system for all changes to take effect."
