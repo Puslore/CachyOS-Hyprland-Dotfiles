@@ -27,7 +27,7 @@ install_with_pacman() {
 }
 
 # Function to install packages with yay
-install_with_yay() {a
+install_with_yay() {
     info "Installing packages with yay: $@"
     yay -S --noconfirm --needed "$@" || error "Failed to install packages with yay: $@"
 }
@@ -61,11 +61,15 @@ fi
 info "Installing flatpak..."
 install_with_pacman flatpak
 
-# 4. Install Hyprland
+# 4. Remove cachy-browser and alacritty if installed
+info "Removing CachyOS browser and Alacritty if installed..."
+sudo pacman -Rns --noconfirm cachy-browser alacritty 2>/dev/null || true
+
+# 5. Install Hyprland
 info "Installing Hyprland..."
 install_with_pacman hyprland
 
-# 5. Install necessary packages for the environment
+# 6. Install necessary packages for the environment
 info "Installing necessary environment packages..."
 install_with_pacman \
     wayland \
@@ -78,12 +82,12 @@ install_with_pacman \
     qt6-wayland \
     xdg-desktop-portal-hyprland
 
-# 6. Install SDDM and enable it
+# 7. Install SDDM and enable it
 info "Installing and enabling SDDM..."
 install_with_pacman sddm
 sudo systemctl enable sddm.service
 
-# 7. Install CachyOS SDDM themes
+# 8. Install CachyOS SDDM themes
 info "Installing CachyOS SDDM themes..."
 if is_in_official_repos cachyos-themes-sddm; then
     install_with_pacman cachyos-themes-sddm
@@ -91,7 +95,7 @@ else
     install_with_yay cachyos-themes-sddm
 fi
 
-# 8. Install packages mentioned in the Hyprland config
+# 9. Install packages mentioned in the Hyprland config
 info "Installing packages mentioned in the config..."
 config_packages=(
     kitty 
@@ -112,23 +116,36 @@ for pkg in "${config_packages[@]}"; do
     fi
 done
 
-# 9. Setup font
-info "Setting up MS Comic Sans font as a system font..."
+# 10. Setup font
+info "Setting up Comic Sans MS font as a system font..."
 # Create font directory if it doesn't exist
 sudo mkdir -p /usr/share/fonts/TTF/
 # Copy font to system fonts directory
-if [ -f ~/.config/fonts/MS\ Comic\ Sans.ttf ]; then
-    sudo cp ~/.config/fonts/MS\ Comic\ Sans.ttf /usr/share/fonts/TTF/
+if [ -f ~/.config/fonts/Comic\ Sans\ MS.ttf ]; then
+    sudo cp ~/.config/fonts/Comic\ Sans\ MS.ttf /usr/share/fonts/TTF/
     # Update font cache
     sudo fc-cache -f
     info "Font installed successfully"
 else
-    error "Font file not found at ~/.config/fonts/MS Comic Sans.ttf"
+    error "Font file not found at ~/.config/fonts/Comic Sans MS.ttf"
 fi
 
-# 10. Install additional requested packages
+# 11. Install additional requested packages
 info "Installing additional requested packages..."
-additional_packages=(telegram-desktop steam)
+additional_packages=(
+    telegram-desktop 
+    waterfox 
+    blueman 
+    bluez 
+    brightnessctl 
+    discord 
+    libreoffice 
+    grim 
+    slurp 
+    networkmanager 
+    network-manager-applet
+    steam
+)
 
 for pkg in "${additional_packages[@]}"; do
     if is_in_official_repos "$pkg"; then
@@ -172,6 +189,14 @@ if is_in_official_repos obsidian; then
 else
     install_with_yay obsidian-bin
 fi
+
+# Enable Bluetooth service
+info "Enabling Bluetooth service..."
+sudo systemctl enable bluetooth.service
+
+# Enable NetworkManager service
+info "Enabling NetworkManager service..."
+sudo systemctl enable NetworkManager.service
 
 info "Setup completed successfully!"
 info "You may need to reboot your system for all changes to take effect."
