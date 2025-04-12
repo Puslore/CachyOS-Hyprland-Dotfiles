@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="$HOME/Screenshots"
+DIR="$HOME/Pictures/Screenshots"
 
 mkdir -p "$DIR"
 

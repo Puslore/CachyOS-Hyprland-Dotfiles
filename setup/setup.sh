@@ -39,15 +39,21 @@ install_with_flatpak() {
 }
 
 # 1. Update system
+<<<<<<< HEAD
 info "Updating system..."
 sudo pacman -Syu --noconfirm || error "Failed to update system"
+=======
+#info "Updating system..."
+#sudo pacman -Syu --noconfirm || error "Failed to update system"
+>>>>>>> 56a0bda (updated)
 
 # 2. Install yay if not already installed
 if ! command -v yay &> /dev/null; then
     info "Installing yay..."
     # Install dependencies
-    install_with_pacman base-devel git
+    # install_with_pacman base-devel git
     # Clone and build yay
+    # sudo rm /tmp/yay -rf
     git clone https://aur.archlinux.org/yay.git /tmp/yay
     cd /tmp/yay
     makepkg -si --noconfirm
@@ -134,12 +140,22 @@ fi
 info "Installing additional requested packages..."
 additional_packages=(
     telegram-desktop 
+<<<<<<< HEAD
     waterfox 
     blueman 
     bluez 
     brightnessctl 
     discord 
     libreoffice 
+=======
+    blueman 
+    bluez 
+    brightnessctl
+    wl-clipboard
+    waterfox-bin
+    discord
+    libreoffice-fresh 
+>>>>>>> 56a0bda (updated)
     grim 
     slurp 
     networkmanager 
