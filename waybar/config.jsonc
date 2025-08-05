@@ -1,20 +1,33 @@
 {
 	"layer": "top",
-	"modules-left": ["battery", "backlight", "pulseaudio", "memory"],
-	/*"modules-left": ["custom/launcher","cpu","memory","disk","hyprland/workspaces"],*/
+	"modules-left": ["battery", "backlight", "pulseaudio", "cpu", "memory"],
 	"modules-center": ["clock"],
-	"modules-right": ["tray", "cava", "hyprland/language","network"],
+	"modules-right": ["tray", "hyprland/language","network", "custom/power"],
 	
 	"pulseaudio": {
 		"tooltip": false,
 		"scroll-step": 5,
-		"format": "{icon}  {volume}%",
-		"format-muted": "muted",
-		"on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		// "format": "{icon}  {volume}%",
+		// "format-muted": "muted",
+		// "on-click":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "format": "{icon}  {volume}%",
+        "format-bluetooth": "{icon} {volume}% bt {format_source}",
+        "format-bluetooth-muted": "{icon} bt-m {format_source}",
+        "format-muted": "muted {format_source}",
+        "format-source": "{volume}%",
+        "format-source-muted": "muted",
 		"format-icons": {
+            "headphone": "headphones",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "car",
 			"default": ["", "", ""]
-		}
+		},
+        "on-click":"pavucontrol",
 	},
+
     "cava": {
             "framerate": 240,
             "autosens": 1,
@@ -31,8 +44,8 @@
             "waves": true,
             "noise_reduction": 0.77,
             "input_delay": 0,
-            "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
-             },
+            "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ]
+            },
 
     "custom/keybinds": {
         "format": "{icon} KB",
@@ -45,7 +58,8 @@
         "format": "{icon}  {percent}%",
         "format-icons": ["", ""]
     },
-        "battery": {
+
+    "battery": {
         "bat": "BAT0",
         "interval": 60,
         "states": {
@@ -54,7 +68,9 @@
         },
         "format": "{icon}  {capacity}%",
         "format-icons": ["", "", "", "", ""],
-        "max-length": 25
+        "max-length": 25,
+        "on-click": "$HOME/.config/waybar/scripts/power-profiles.sh",
+        "tooltip-format": "Power profile\n{time}"
     },
 
     "disk": {
@@ -62,6 +78,7 @@
         "format": "  {percentage_used}%",
         "path": "/"
     },
+
     "privacy": {
         "icon-spacing": 10,
         "icon-size": 18,
@@ -86,37 +103,44 @@
         ]
     },
 
-
     "hyprland/language": {
-        "format": "  {1}",
-        "tooltip": false,
+        "format": "  {}",
+        "format-en": "en",
+        "format-ru": "ru"
     },
-    "cpu": {
-        "interval": 15,
-        "format": "  {}%",
-        "max-length": 10
+
+    "custom/cpu": {
+        "format": "",
+        "max-length": 10,
+        "interval": 5,
+        "exec": "~/.config/waybar/scripts/cpu-info.sh"
     },
+
     "memory": {
-        "interval": 30,
+        "interval": 5,
         "format": "ram  {}%",
         "max-length": 10
     },
+
     "custom/launcher":{
         "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi",
         "tooltip": false,
     },
+
     "custom/power":{
-        "format": "⏻ ",
+        "format": "⏻",
         "tooltip": false,
-        "on-click": "bash ~/.config/rofi/powermenu.sh",
-        "on-click-right": "killall rofi",
+        "on-click": "bash ~/.config/waybar/scripts/powermenu.sh"
     },
+
     "clock": {
-        "format": "  {:%A - %B %d, %Y - %R}",
+        "interval": 1,
+        "format": "{:%A - %d.%m.%Y - %X}",
         "tooltip": false,
     },
+
     "hyprland/workspaces": {
         "format": "{icon}",
         "tooltip": false,
@@ -129,15 +153,17 @@
             "urgent": "",
             "active": "",
             "default": ""
+        },
+        "tray": {
+        "icon-size": 21,
+        "spacing": 10
+        }
     },
-    "tray": {
-    "icon-size": 21,
-    "spacing": 10
-}
-    },
+
     "network": {
         "interface": "wlan0",
-        "format-wifi": "󰘊 {essid}({signalStrength}%)",
+        // "format-wifi": "󰘊 {essid}({signalStrength}%)",
+        "format-wifi": "󰘊 {essid}",
         "format-ethernet": "  {ipaddr}/{cidr}",
         "format-disconnected": "disconnected",
         "tooltip": false,

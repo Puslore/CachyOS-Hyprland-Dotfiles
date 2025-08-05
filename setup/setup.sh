@@ -1,6 +1,9 @@
 #!/bin/bash
 
+
 # Script to set up Hyprland environment on CachyOS
+
+
 # Exit on error
 set -e
 
@@ -39,13 +42,8 @@ install_with_flatpak() {
 }
 
 # 1. Update system
-<<<<<<< HEAD
-info "Updating system..."
-sudo pacman -Syu --noconfirm || error "Failed to update system"
-=======
 #info "Updating system..."
 #sudo pacman -Syu --noconfirm || error "Failed to update system"
->>>>>>> 56a0bda (updated)
 
 # 2. Install yay if not already installed
 if ! command -v yay &> /dev/null; then
@@ -104,13 +102,13 @@ fi
 # 9. Install packages mentioned in the Hyprland config
 info "Installing packages mentioned in the config..."
 config_packages=(
-    kitty 
-    dolphin 
-    waybar 
-    mako 
-    hyprpaper 
-    hypridle 
-    hyprlock 
+    kitty
+    dolphin
+    waybar
+    mako
+    hyprpaper
+    hypridle
+    hyprlock
     rofi
 )
 
@@ -139,26 +137,17 @@ fi
 # 11. Install additional requested packages
 info "Installing additional requested packages..."
 additional_packages=(
-    telegram-desktop 
-<<<<<<< HEAD
-    waterfox 
-    blueman 
-    bluez 
-    brightnessctl 
-    discord 
-    libreoffice 
-=======
-    blueman 
-    bluez 
+    telegram-desktop
+    blueman
+    bluez
     brightnessctl
     wl-clipboard
     waterfox-bin
     discord
-    libreoffice-fresh 
->>>>>>> 56a0bda (updated)
-    grim 
-    slurp 
-    networkmanager 
+    libreoffice-fresh
+    grim
+    slurp
+    networkmanager
     network-manager-applet
     steam
 )
@@ -206,6 +195,94 @@ else
     install_with_yay obsidian-bin
 fi
 
+# 12. Install development tools
+info "Installing development tools..."
+dev_packages=(
+    qtcreator
+    postgresql
+    micro
+    vim
+    tmux
+    meld
+)
+
+for pkg in "${dev_packages[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
+# 13. Install virtualization tools
+info "Installing virtualization tools..."
+virtualization_packages=(
+    docker
+    virtualbox
+    virtualbox-host-dkms
+    virt-manager
+    virt-viewer
+)
+
+for pkg in "${virtualization_packages[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
+# 14. Install multimedia tools
+info "Installing multimedia tools..."
+media_packages=(
+    inkscape
+    vlc-plugins-all
+    swappy
+    swayimg
+)
+
+for pkg in "${media_packages[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
+# 15. Install additional Hyprland tools
+info "Installing additional Hyprland tools..."
+hypr_additional=(
+    hyprpicker
+    hyprshot
+    hyprsunset
+    swww-git
+)
+
+for pkg in "${hypr_additional[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
+# 16. Install system utilities
+info "Installing system utilities..."
+system_tools=(
+    paru
+    octopi
+    pavucontrol
+    rsync
+)
+
+for pkg in "${system_tools[@]}"; do
+    if is_in_official_repos "$pkg"; then
+        install_with_pacman "$pkg"
+    else
+        install_with_yay "$pkg"
+    fi
+done
+
 # Enable Bluetooth service
 info "Enabling Bluetooth service..."
 sudo systemctl enable bluetooth.service
@@ -214,5 +291,11 @@ sudo systemctl enable bluetooth.service
 info "Enabling NetworkManager service..."
 sudo systemctl enable NetworkManager.service
 
+# Enable Docker service
+info "Enabling Docker service..."
+sudo systemctl enable docker.service
+sudo usermod -aG docker $USER
+
 info "Setup completed successfully!"
 info "You may need to reboot your system for all changes to take effect."
+info "After reboot, you may need to log out and log back in to use Docker without sudo."
