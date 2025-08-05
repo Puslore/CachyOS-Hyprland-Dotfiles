@@ -143,6 +143,7 @@ additional_packages=(
     brightnessctl
     wl-clipboard
     waterfox-bin
+    zenbrowser-bin
     discord
     libreoffice-fresh
     grim
