@@ -151,6 +151,8 @@ additional_packages=(
     networkmanager
     network-manager-applet
     steam
+    nekoray-bin
+    polkit-gnome
 )
 
 for pkg in "${additional_packages[@]}"; do
