@@ -151,7 +151,6 @@ additional_packages=(
     networkmanager
     network-manager-applet
     steam
-    nekoray-bin
     hyprpolkitagent
 )
 
