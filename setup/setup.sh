@@ -110,6 +110,7 @@ config_packages=(
     hypridle
     hyprlock
     rofi
+    hyprpolkitagent
 )
 
 for pkg in "${config_packages[@]}"; do
@@ -151,7 +152,14 @@ additional_packages=(
     networkmanager
     network-manager-applet
     steam
-    hyprpolkitagent
+    kodi
+    cmatrix
+    cowsay
+    asciiquarium
+    lolcat
+    "pipes.sh"
+    nyancat
+    
 )
 
 for pkg in "${additional_packages[@]}"; do
