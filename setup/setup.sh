@@ -111,6 +111,7 @@ config_packages=(
     hyprlock
     rofi
     hyprpolkitagent
+    wofi
 )
 
 for pkg in "${config_packages[@]}"; do
