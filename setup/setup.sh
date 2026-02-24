@@ -147,6 +147,7 @@ additional_packages=(
     waterfox-bin
     zenbrowser-bin
     discord
+    element-desktop
     libreoffice-fresh
     grim
     slurp
