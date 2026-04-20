@@ -112,6 +112,7 @@ config_packages=(
     rofi
     hyprpolkitagent
     wofi
+    ntfs-3g
 )
 
 for pkg in "${config_packages[@]}"; do
