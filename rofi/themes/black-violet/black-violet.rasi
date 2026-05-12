@@ -1,7 +1,7 @@
 @import "./colors/purple-night.rasi"
 
 * {
-    font:                        "Comic Sans MS 14";
+    font:                        "Comic Sans MS 12";
     selected-active-foreground:  @background; /* Цвет текста активного элемента */
     lightfg:                     @text;       /* Светлый текст */
     separatorcolor:              @overlay2;   /* Цвет разделителей */
