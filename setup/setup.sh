@@ -113,6 +113,8 @@ config_packages=(
     hyprpolkitagent
     wofi
     ntfs-3g
+    plasma-integration
+    xdg-desktop-portal-kde
 )
 
 for pkg in "${config_packages[@]}"; do
@@ -140,6 +142,7 @@ fi
 # 11. Install additional requested packages
 info "Installing additional requested packages..."
 additional_packages=(
+	ntfs-3g
     telegram-desktop
     blueman
     bluez
@@ -148,7 +151,6 @@ additional_packages=(
     waterfox-bin
     zenbrowser-bin
     discord
-    element-desktop
     libreoffice-fresh
     grim
     slurp
@@ -228,22 +230,22 @@ for pkg in "${dev_packages[@]}"; do
 done
 
 # 13. Install virtualization tools
-info "Installing virtualization tools..."
-virtualization_packages=(
-    docker
-    virtualbox
-    virtualbox-host-dkms
-    virt-manager
-    virt-viewer
-)
-
-for pkg in "${virtualization_packages[@]}"; do
-    if is_in_official_repos "$pkg"; then
-        install_with_pacman "$pkg"
-    else
-        install_with_yay "$pkg"
-    fi
-done
+#info "Installing virtualization tools..."
+#virtualization_packages=(
+#    docker
+#    virtualbox
+#    virtualbox-host-dkms
+#    virt-manager
+#    virt-viewer
+#)
+#
+#for pkg in "${virtualization_packages[@]}"; do
+#    if is_in_official_repos "$pkg"; then
+#        install_with_pacman "$pkg"
+#    else
+#        install_with_yay "$pkg"
+#    fi
+#done
 
 # 14. Install multimedia tools
 info "Installing multimedia tools..."
