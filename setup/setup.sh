@@ -329,6 +329,18 @@ cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-3.0/gtk.css ~/.config/gtk-3.0/gtk.css
 cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-4.0/gtk.css ~/.config/gtk-4.0/gtk.css
 cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
+# Deploy Zen Browser UI font (Comic Sans MS via userChrome.css)
+info "Deploying Zen Browser UI font override..."
+ZEN_PROFILE_DIR=$(find ~/.zen -maxdepth 1 -type d -name "*.Default*" 2>/dev/null | head -1)
+if [ -n "$ZEN_PROFILE_DIR" ]; then
+    mkdir -p "$ZEN_PROFILE_DIR/chrome"
+    cp ~/.config/CachyOS-Hyprland-Dotfiles/zen-browser/chrome/userChrome.css "$ZEN_PROFILE_DIR/chrome/userChrome.css"
+    cp ~/.config/CachyOS-Hyprland-Dotfiles/zen-browser/user.js "$ZEN_PROFILE_DIR/user.js"
+    info "Zen Browser font override deployed to $ZEN_PROFILE_DIR"
+else
+    info "Zen Browser profile not found, skipping font override"
+fi
+
 info "Setup completed successfully!"
 info "You may need to reboot your system for all changes to take effect."
 info "After reboot, you may need to log out and log back in to use Docker without sudo."
