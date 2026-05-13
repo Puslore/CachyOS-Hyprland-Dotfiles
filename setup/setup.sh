@@ -311,6 +311,13 @@ info "Enabling Docker service..."
 sudo systemctl enable docker.service
 sudo usermod -aG docker $USER
 
+# Apply GTK and icon theme settings
+info "Applying GTK and icon theme settings..."
+gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'default'
+gsettings set org.gnome.desktop.interface cursor-size 24
+
 info "Setup completed successfully!"
 info "You may need to reboot your system for all changes to take effect."
 info "After reboot, you may need to log out and log back in to use Docker without sudo."
