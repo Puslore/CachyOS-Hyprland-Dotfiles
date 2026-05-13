@@ -315,8 +315,19 @@ sudo usermod -aG docker $USER
 info "Applying GTK and icon theme settings..."
 gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'default'
 gsettings set org.gnome.desktop.interface cursor-size 24
+gsettings set org.gnome.desktop.interface font-name 'Comic Sans MS 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Comic Sans MS 10'
+
+# Deploy GTK CSS theme for dialog windows (Purple Night)
+info "Deploying GTK dialog theme (Purple Night)..."
+mkdir -p ~/.config/gtk-3.0
+mkdir -p ~/.config/gtk-4.0
+cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-3.0/gtk.css ~/.config/gtk-3.0/gtk.css
+cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-4.0/gtk.css ~/.config/gtk-4.0/gtk.css
+cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
 info "Setup completed successfully!"
 info "You may need to reboot your system for all changes to take effect."

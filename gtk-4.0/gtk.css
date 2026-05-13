@@ -1,0 +1,371 @@
+/*
+ * Purple Night Theme — GTK 3 Dialog Overrides
+ *
+ * Color palette (from kdeglobals / kitty):
+ *   Background:     #191919  (25,25,25)
+ *   Base/View:      #000000
+ *   Button BG:      #353432  (53,52,50)
+ *   Accent:         #A057FF  (160,87,255)
+ *   Accent dark:    #6A0DAD
+ *   Foreground:     #FFFFFF
+ *   Inactive FG:    #C0C0CB  (192,192,203)
+ *   Negative:       #D31078
+ *   Link:           #608FFF
+ *   Selection BG:   #A057FF
+ *   Selection FG:   #000000
+ *   Font:           Comic Sans MS
+ */
+
+/* ===== Global overrides ===== */
+
+* {
+    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+}
+
+/* ===== Dialog / Message-dialog windows ===== */
+
+messagedialog,
+dialog,
+.dialog-vbox,
+.message-dialog {
+    background-color: #191919;
+    color: #FFFFFF;
+}
+
+messagedialog .titlebar,
+dialog .titlebar {
+    background-color: #0D0D0D;
+    color: #FFFFFF;
+    border-bottom: 1px solid #A057FF;
+}
+
+messagedialog .dialog-action-area button,
+dialog .dialog-action-area button,
+messagedialog .dialog-action-box button,
+dialog .dialog-action-box button {
+    background-image: none;
+    background-color: #353432;
+    color: #FFFFFF;
+    border: 1px solid #4a4a4a;
+    border-radius: 6px;
+    padding: 6px 16px;
+    min-height: 24px;
+    transition: all 200ms ease;
+}
+
+messagedialog .dialog-action-area button:hover,
+dialog .dialog-action-area button:hover,
+messagedialog .dialog-action-box button:hover,
+dialog .dialog-action-box button:hover {
+    background-color: #A057FF;
+    color: #000000;
+    border-color: #6A0DAD;
+}
+
+messagedialog .dialog-action-area button:active,
+dialog .dialog-action-area button:active,
+messagedialog .dialog-action-box button:active,
+dialog .dialog-action-box button:active {
+    background-color: #6A0DAD;
+    color: #FFFFFF;
+}
+
+messagedialog .dialog-action-area button:focus,
+dialog .dialog-action-area button:focus,
+messagedialog .dialog-action-box button:focus,
+dialog .dialog-action-box button:focus {
+    box-shadow: 0 0 0 2px rgba(160, 87, 255, 0.4);
+    border-color: #A057FF;
+}
+
+/* Suggested-action (primary) button */
+messagedialog .dialog-action-area button.suggested-action,
+dialog .dialog-action-area button.suggested-action {
+    background-color: #A057FF;
+    color: #000000;
+    border-color: #6A0DAD;
+    font-weight: bold;
+}
+
+messagedialog .dialog-action-area button.suggested-action:hover,
+dialog .dialog-action-area button.suggested-action:hover {
+    background-color: #b87aff;
+    color: #000000;
+}
+
+/* Destructive-action button */
+messagedialog .dialog-action-area button.destructive-action,
+dialog .dialog-action-area button.destructive-action {
+    background-color: #D31078;
+    color: #FFFFFF;
+    border-color: #a00d5e;
+}
+
+messagedialog .dialog-action-area button.destructive-action:hover,
+dialog .dialog-action-area button.destructive-action:hover {
+    background-color: #FF56AC;
+    color: #000000;
+}
+
+/* Dialog label / text */
+messagedialog label,
+dialog label {
+    color: #FFFFFF;
+}
+
+messagedialog .secondary label,
+dialog .secondary label {
+    color: #C0C0CB;
+}
+
+/* ===== General window / headerbar fallback ===== */
+
+.background {
+    background-color: #191919;
+    color: #FFFFFF;
+}
+
+headerbar {
+    background-color: #0D0D0D;
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(160, 87, 255, 0.3);
+}
+
+headerbar button {
+    background-image: none;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+headerbar button:hover {
+    background-color: rgba(160, 87, 255, 0.2);
+    border-color: rgba(160, 87, 255, 0.4);
+}
+
+headerbar button:active {
+    background-color: rgba(160, 87, 255, 0.4);
+}
+
+/* ===== General buttons ===== */
+
+button {
+    background-image: none;
+    background-color: #353432;
+    color: #FFFFFF;
+    border: 1px solid #4a4a4a;
+    border-radius: 6px;
+    padding: 4px 12px;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    background-color: #A057FF;
+    color: #000000;
+    border-color: #6A0DAD;
+}
+
+button:active {
+    background-color: #6A0DAD;
+    color: #FFFFFF;
+}
+
+button.suggested-action {
+    background-color: #A057FF;
+    color: #000000;
+    border-color: #6A0DAD;
+}
+
+button.destructive-action {
+    background-color: #D31078;
+    color: #FFFFFF;
+    border-color: #a00d5e;
+}
+
+/* ===== Entries / inputs ===== */
+
+entry {
+    background-color: #000000;
+    color: #FFFFFF;
+    border: 1px solid #4a4a4a;
+    border-radius: 4px;
+    caret-color: #A057FF;
+}
+
+entry:focus {
+    border-color: #A057FF;
+    box-shadow: 0 0 0 1px rgba(160, 87, 255, 0.3);
+}
+
+/* ===== Selection ===== */
+
+*:selected,
+selection {
+    background-color: #A057FF;
+    color: #000000;
+}
+
+/* ===== Scrollbar ===== */
+
+scrollbar slider {
+    background-color: rgba(160, 87, 255, 0.3);
+    border-radius: 10px;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(160, 87, 255, 0.5);
+}
+
+scrollbar slider:active {
+    background-color: #A057FF;
+}
+
+/* ===== Tooltip ===== */
+
+tooltip,
+tooltip.background {
+    background-color: #191919;
+    color: #FFFFFF;
+    border: 1px solid #A057FF;
+    border-radius: 4px;
+}
+
+/* ===== Links ===== */
+
+*:link,
+button.link {
+    color: #608FFF;
+}
+
+*:visited {
+    color: #9B59B6;
+}
+
+/* ===== Check / radio ===== */
+
+check,
+radio {
+    background-color: #000000;
+    border-color: #4a4a4a;
+    color: #A057FF;
+}
+
+check:checked,
+radio:checked {
+    background-color: #A057FF;
+    color: #000000;
+    border-color: #6A0DAD;
+}
+
+/* ===== Switch ===== */
+
+switch {
+    background-color: #353432;
+    border-color: #4a4a4a;
+    border-radius: 12px;
+}
+
+switch:checked {
+    background-color: #A057FF;
+    border-color: #6A0DAD;
+}
+
+switch slider {
+    background-color: #FFFFFF;
+    border-radius: 50%;
+}
+
+/* ===== Menu / popover ===== */
+
+menu,
+.menu,
+popover,
+popover.background {
+    background-color: #191919;
+    color: #FFFFFF;
+    border: 1px solid #353432;
+    border-radius: 6px;
+}
+
+menu menuitem,
+.menu menuitem {
+    color: #FFFFFF;
+}
+
+menu menuitem:hover,
+.menu menuitem:hover {
+    background-color: #A057FF;
+    color: #000000;
+}
+
+/* ===== Notebook / tabs ===== */
+
+notebook header tab {
+    background-color: #0D0D0D;
+    color: #C0C0CB;
+    border: 1px solid transparent;
+}
+
+notebook header tab:checked {
+    background-color: #191919;
+    color: #FFFFFF;
+    border-bottom: 2px solid #A057FF;
+}
+
+/* ===== Treeview / list ===== */
+
+treeview.view {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+treeview.view:selected {
+    background-color: #A057FF;
+    color: #000000;
+}
+
+treeview.view header button {
+    background-color: #191919;
+    color: #FFFFFF;
+    border-color: #353432;
+}
+
+/* ===== Infobar ===== */
+
+infobar {
+    background-color: rgba(160, 87, 255, 0.15);
+    color: #FFFFFF;
+}
+
+/* ===== Progress bar ===== */
+
+progressbar progress {
+    background-color: #A057FF;
+    border-radius: 4px;
+}
+
+progressbar trough {
+    background-color: #353432;
+    border-radius: 4px;
+}
+
+/* ===== Scale / slider ===== */
+
+scale trough {
+    background-color: #353432;
+    border-radius: 4px;
+}
+
+scale trough highlight {
+    background-color: #A057FF;
+    border-radius: 4px;
+}
+
+scale slider {
+    background-color: #FFFFFF;
+    border: 1px solid #6A0DAD;
+    border-radius: 50%;
+}
