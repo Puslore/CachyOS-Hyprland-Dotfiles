@@ -153,11 +153,12 @@
             "urgent": "",
             "active": "",
             "default": ""
-        },
-        "tray": {
+        }
+    },
+
+    "tray": {
         "icon-size": 21,
         "spacing": 10
-        }
     },
 
     "network": {
