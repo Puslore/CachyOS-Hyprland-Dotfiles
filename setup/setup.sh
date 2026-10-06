@@ -338,8 +338,8 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'default'
 gsettings set org.gnome.desktop.interface cursor-size 24
-gsettings set org.gnome.desktop.interface font-name 'ComicShannsMono Nerd Font 10'
-gsettings set org.gnome.desktop.interface document-font-name 'ComicShannsMono Nerd Font 10'
+gsettings set org.gnome.desktop.interface font-name 'Comic Sans MS 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Comic Sans MS 10'
 
 # Deploy GTK CSS theme for dialog windows (Purple Night)
 info "Deploying GTK dialog theme (Purple Night)..."
