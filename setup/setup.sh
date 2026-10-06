@@ -164,6 +164,9 @@ additional_packages=(
     lolcat
     "pipes.sh"
     nyancat
+    okular
+    sioyek
+    kamoso
     
 )
 
