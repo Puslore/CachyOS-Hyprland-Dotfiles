@@ -152,7 +152,7 @@
         "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi",
-        "tooltip": false,
+        "tooltip": false
     },
     "custom/power": {
         "format": "⏻",
@@ -162,7 +162,7 @@
     "clock": {
         "interval": 1,
         "format": "{:%A - %d.%m.%Y - %X}",
-        "tooltip": false,
+        "tooltip": false
     },
     "hyprland/workspaces": {
         "format": "{icon}",
