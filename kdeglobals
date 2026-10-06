@@ -133,11 +133,11 @@ ForegroundVisited=155,89,182
 [General]
 ColorScheme=PurpleNight
 Name=Purple Night
-fixed=Monospace,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-font=Comic Sans MS,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-menuFont=Comic Sans MS,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-smallestReadableFont=Comic Sans MS,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-toolBarFont=Comic Sans MS,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=ComicShannsMono Nerd Font Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+font=ComicShannsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=ComicShannsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=ComicShannsMono Nerd Font,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=ComicShannsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [KDE]
 contrast=4

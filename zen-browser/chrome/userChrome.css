@@ -1,15 +1,15 @@
 /*
  * Purple Night — Zen Browser UI Font Override
- * Forces Comic Sans MS as the UI chrome font
+ * Forces ComicShannsMono Nerd Font as the UI chrome font
  */
 
 /* Global UI font override */
 :root {
-    --zen-primary-font: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    --zen-primary-font: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
 }
 
 * {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
     font-size: 12pt !important;
 }
 
@@ -27,14 +27,14 @@
 #nav-bar,
 .bookmark-item,
 .toolbarbutton-text {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
 }
 
 /* Sidebar */
 #sidebar-header,
 #sidebar-box,
 #sidebar {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
 }
 
 /* Menus and popups */
@@ -44,18 +44,18 @@ menu,
 .panel-arrowcontent,
 panel,
 tooltip {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
 }
 
 /* Findbar */
 .findbar-textbox,
 findbar {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
 }
 
 /* Status bar / notification bar */
 #statuspanel-label,
 notification,
 notificationbox {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif !important;
 }

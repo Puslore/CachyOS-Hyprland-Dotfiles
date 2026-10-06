@@ -125,18 +125,35 @@ for pkg in "${config_packages[@]}"; do
     fi
 done
 
-# 10. Setup font
-info "Setting up Comic Sans MS font as a system font..."
+# 10. Setup fonts
+info "Setting up ComicShannsMono Nerd Font as system fonts..."
 # Create font directory if it doesn't exist
 sudo mkdir -p /usr/share/fonts/TTF/
-# Copy font to system fonts directory
-if [ -f ~/.config/fonts/Comic\ Sans\ MS.ttf ]; then
-    sudo cp ~/.config/fonts/Comic\ Sans\ MS.ttf /usr/share/fonts/TTF/
+# Copy all font files to system fonts directory
+font_files=(
+    "Comic Sans MS.ttf"
+    "ComicShannsMonoNerdFont-Regular.otf"
+    "ComicShannsMonoNerdFont-Bold.otf"
+    "ComicShannsMonoNerdFontMono-Regular.otf"
+    "ComicShannsMonoNerdFontMono-Bold.otf"
+    "ComicShannsMonoNerdFontPropo-Regular.otf"
+    "ComicShannsMonoNerdFontPropo-Bold.otf"
+)
+fonts_installed=0
+for font_file in "${font_files[@]}"; do
+    if [ -f ~/.config/fonts/"$font_file" ]; then
+        sudo cp ~/.config/fonts/"$font_file" /usr/share/fonts/TTF/
+        fonts_installed=$((fonts_installed + 1))
+    else
+        info "Font file not found: ~/.config/fonts/$font_file"
+    fi
+done
+if [ "$fonts_installed" -gt 0 ]; then
     # Update font cache
     sudo fc-cache -f
-    info "Font installed successfully"
+    info "Installed $fonts_installed font file(s) successfully"
 else
-    error "Font file not found at ~/.config/fonts/Comic Sans MS.ttf"
+    error "No font files found in ~/.config/fonts/"
 fi
 
 # 11. Install additional requested packages
@@ -321,8 +338,8 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'default'
 gsettings set org.gnome.desktop.interface cursor-size 24
-gsettings set org.gnome.desktop.interface font-name 'Comic Sans MS 10'
-gsettings set org.gnome.desktop.interface document-font-name 'Comic Sans MS 10'
+gsettings set org.gnome.desktop.interface font-name 'ComicShannsMono Nerd Font 10'
+gsettings set org.gnome.desktop.interface document-font-name 'ComicShannsMono Nerd Font 10'
 
 # Deploy GTK CSS theme for dialog windows (Purple Night)
 info "Deploying GTK dialog theme (Purple Night)..."
@@ -332,7 +349,7 @@ cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-3.0/gtk.css ~/.config/gtk-3.0/gtk.css
 cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-4.0/gtk.css ~/.config/gtk-4.0/gtk.css
 cp ~/.config/CachyOS-Hyprland-Dotfiles/gtk-4.0/settings.ini ~/.config/gtk-4.0/settings.ini
 
-# Deploy Zen Browser UI font (Comic Sans MS via userChrome.css)
+# Deploy Zen Browser UI font (ComicShannsMono Nerd Font via userChrome.css)
 info "Deploying Zen Browser UI font override..."
 ZEN_PROFILE_DIR=$(find ~/.zen -maxdepth 1 -type d -name "*.Default*" 2>/dev/null | head -1)
 if [ -n "$ZEN_PROFILE_DIR" ]; then

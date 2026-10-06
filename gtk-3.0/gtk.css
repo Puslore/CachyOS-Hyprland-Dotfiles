@@ -13,13 +13,13 @@
  *   Link:           #608FFF
  *   Selection BG:   #A057FF
  *   Selection FG:   #000000
- *   Font:           Comic Sans MS
+ *   Font:           ComicShannsMono Nerd Font
  */
 
 /* ===== Global overrides ===== */
 
 * {
-    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+    font-family: "ComicShannsMono Nerd Font", "Comic Sans", cursive, sans-serif;
 }
 
 /* ===== Dialog / Message-dialog windows ===== */
